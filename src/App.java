@@ -1,18 +1,30 @@
+import java.util.Scanner;
+
 public class App {
     public static void main(String[] args) throws Exception {
         Game game = new Game();
-        game.printBoard();
-        System.out.println();
+        Scanner keyboard = new Scanner(System.in);
+        String input = "";
 
-        if (game.movePiece(6, 0, 5, 0)) {
+        while (!input.equals("end")) {
+
             game.printBoard();
-            System.out.println();
+            System.out.print("Choose piece and next move: ");
+            input = keyboard.nextLine();
+
+            if (!input.equals("end")) {
+                int[] coords = new int[4];
+                for (int i = 0; i < coords.length; i++) {
+                    coords[i] = Integer.parseInt(input.split(" ")[i]);
+                }
+                System.out.println();
+                game.movePiece(coords[0], coords[1], coords[2], coords[3]);
+                
+            }
 
         }
 
-        if (game.movePiece(5, 0, 6, 0)) {
-            game.printBoard();
-        }
+        keyboard.close();
 
     }
 }

@@ -1,11 +1,33 @@
 
-/*
- * TODO: Check pawn for attack, then take
- */
 public class Pawn extends GamePiece {
 
     public Pawn(int currentX, int currentY, boolean isWhite) {
         super(currentX, currentY, isWhite);
+    }
+
+    /**
+     * Promote the pawn to the type given
+     * @param type : piece is promoting to type
+     */
+    public void promote(PieceType type) {
+
+        switch (type) {
+            case PieceType.QUEEN:
+                Game.board[currentX][currentY] = new Queen(currentX, currentY, isWhite);
+                break;
+            case PieceType.BISHOP:
+                Game.board[currentX][currentY] = new Bishop(currentX, currentY, isWhite);
+                break;
+            case PieceType.KNIGHT:
+                Game.board[currentX][currentY] = new Knight(currentX, currentY, isWhite);
+                break;
+            case PieceType.ROOK:
+                Game.board[currentX][currentY] = new Rook(currentX, currentY, isWhite);
+                break;
+            default:
+                System.out.println("Can't promote to : " + type);
+                break;
+        }
     }
 
     // Check if pawn's first move is valid
@@ -28,9 +50,35 @@ public class Pawn extends GamePiece {
         return false;
     }
 
+    public boolean validAttack(int nextX, int nextY, boolean isWhite) {
+        if (isWhite) {
+            if (((nextX == currentX - 1) && (nextY == currentY + 1))
+                    || ((nextX == currentX - 1) && (nextY == currentY - 1))) {
+                return true;
+            }
+        } else {
+
+            if (((nextX == currentX + 1) && (nextY == currentY + 1))
+                    || ((nextX == currentX + 1) && (nextY == currentY - 1))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public boolean checkMove(int nextX, int nextY) {
         if (inbounds(nextX, nextY)) {
+
+            if (validAttack(nextX, nextY, isWhite)) {
+                move(nextX, nextY);
+
+            } else if (Game.board[nextX][nextY] != null && Math.abs(nextX - currentX) < 2) {
+                System.out.println("Cannot move to " + nextX + " ," + nextY + " " + Game.board[nextX][nextY]
+                        + " is blocking movement");
+                return false;
+            }
+
             if (this.isWhite) {
                 if (currentX > nextX && nextY == currentY) {
                     if (currentX == 6) {
