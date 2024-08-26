@@ -43,9 +43,25 @@ public class Game {
         }
     }
 
-    public boolean movePiece(int pieceX, int pieceY, int nextX, int nextY){
+    public boolean movePiece(int pieceX, int pieceY, int nextX, int nextY, PieceType promoteTo){
+        GamePiece piece = Game.board[pieceX][pieceY];
 
-        if(Game.board[pieceX][pieceY].checkMove(nextX, nextY)){
+        if(piece.checkMove(nextX, nextY)){
+
+            if(piece instanceof Pawn){
+                ((Pawn) Game.board[piece.currentX][piece.currentY]).promote(promoteTo);
+            }else if(piece instanceof Pawn){
+                ((Pawn) Game.board[piece.currentX][piece.currentY]).promote(promoteTo);
+            }
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean movePiece(int pieceX, int pieceY, int nextX, int nextY){
+        GamePiece piece = Game.board[pieceX][pieceY];
+
+        if(piece.checkMove(nextX, nextY)){
             return true;
         }
         return false;

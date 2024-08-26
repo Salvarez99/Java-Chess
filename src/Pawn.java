@@ -72,6 +72,7 @@ public class Pawn extends GamePiece {
 
             if (validAttack(nextX, nextY, isWhite)) {
                 move(nextX, nextY);
+                return true;
 
             } else if (Game.board[nextX][nextY] != null && Math.abs(nextX - currentX) < 2) {
                 System.out.println("Cannot move to " + nextX + " ," + nextY + " " + Game.board[nextX][nextY]
