@@ -1,14 +1,20 @@
 
 public class Knight extends GamePiece {
 
-    public Knight(int currentX, int currentY, boolean isWhite) {
-        super(currentX, currentY, isWhite);
+    public Knight(PieceType type, int currentRow, int currentCol, boolean isWhite) {
+        super(type, currentRow, currentCol, isWhite);
     }
-    
+
     @Override
-    public boolean checkMove(int nextX, int nextY) {
+    public boolean isValidMove(int nextRow, int nextCol) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'isValidMove'");
+    }
+
+    @Override
+    public boolean checkMove(int nextRow, int nextCol) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'checkMove'");
     }
-    
+
 }

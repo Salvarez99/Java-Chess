@@ -1,76 +1,76 @@
 
 public class Game {
     public static GamePiece[][] board = new GamePiece[8][8];
-    
-    public Game(){
-      makeBoard();
+
+    public Game() {
+        makeBoard();
     }
 
-    private void makeBoard(){
+    private void makeBoard() {
         boolean isWhite = false;
 
-        for (int i = 0; i < Game.board.length; i++){
+        for (int row = 0; row < Game.board.length; row++) {
 
-            if(i < 2){
+            if (row < 2) {
                 isWhite = false;
-            }else if (i > 5) {
+            } else if (row > 5) {
                 isWhite = true;
             }
 
-            for (int j = 0; j < Game.board.length; j++) {
-                if (i > 1 && i < 6) {
-                    Game.board[i][j] = null;
-                    
-                }else if(i == 1 || i == 6){
-                    Game.board[i][j] = new Pawn(i, j, isWhite);
+            for (int col = 0; col < Game.board.length; col++) {
+                if (row > 1 && row < 6) {
+                    Game.board[row][col] = null;
 
-                }else if(j == 4){
-                    Game.board[i][j] = new King(i, j, isWhite);
-    
-                }else if(j == 3){
-                    Game.board[i][j] = new Queen(i, j, isWhite);
-    
-                }else if(j == 0 || j == 7){
-                    Game.board[i][j] = new Rook(i, j, isWhite);
-    
-                }else if(j == 1 || j == 6){
-                    Game.board[i][j] = new Knight(i, j, isWhite);
-    
-                }else if(j == 2 || j == 5){
-                    Game.board[i][j] = new Bishop(i, j, isWhite);
+                } else if (row == 1 || row == 6) {
+                    Game.board[row][col] = new Pawn(PieceType.PAWN, row, col, isWhite);
+
+                } else if (col == 4) {
+                    Game.board[row][col] = new King(PieceType.KING, row, col, isWhite);
+
+                } else if (col == 3) {
+                    Game.board[row][col] = new Queen(PieceType.QUEEN, row, col, isWhite);
+
+                } else if (col == 0 || col == 7) {
+                    Game.board[row][col] = new Rook(PieceType.ROOK, row, col, isWhite);
+
+                } else if (col == 1 || col == 6) {
+                    Game.board[row][col] = new Knight(PieceType.KNIGHT, row, col, isWhite);
+
+                } else if (col == 2 || col == 5) {
+                    Game.board[row][col] = new Bishop(PieceType.BISHOP, row, col, isWhite);
                 }
             }
         }
     }
 
-    public boolean movePiece(int pieceX, int pieceY, int nextX, int nextY, PieceType promoteTo){
-        GamePiece piece = Game.board[pieceX][pieceY];
+    public boolean movePiece(int pieceRow, int pieceCol, int nextRow, int nextCol, PieceType promoteTo) {
+        GamePiece piece = Game.board[pieceRow][pieceCol];
 
-        if(piece.checkMove(nextX, nextY)){
+        if (piece.checkMove(nextRow, nextCol)) {
 
-            if(piece instanceof Pawn){
-                ((Pawn) Game.board[piece.currentX][piece.currentY]).promote(promoteTo);
-            }else if(piece instanceof Pawn){
-                ((Pawn) Game.board[piece.currentX][piece.currentY]).promote(promoteTo);
+            if (piece instanceof Pawn) {
+                ((Pawn) Game.board[piece.currentRow][piece.currentCol]).promote(promoteTo);
+            } else if (piece instanceof Pawn) {
+                ((Pawn) Game.board[piece.currentRow][piece.currentCol]).promote(promoteTo);
             }
             return true;
         }
         return false;
     }
-    
-    public boolean movePiece(int pieceX, int pieceY, int nextX, int nextY){
-        GamePiece piece = Game.board[pieceX][pieceY];
 
-        if(piece.checkMove(nextX, nextY)){
+    public boolean movePiece(int pieceRow, int pieceCol, int nextRow, int nextCol) {
+        GamePiece piece = Game.board[pieceRow][pieceCol];
+
+        if (piece.checkMove(nextRow, nextCol)) {
             return true;
         }
         return false;
     }
 
-    public void printBoard(){
-        for (int i = 0; i < Game.board.length; i++) {
-            for (int j = 0; j < Game.board.length; j++) {
-                System.out.print(Game.board[i][j] + " ");
+    public void printBoard() {
+        for (int row = 0; row < Game.board.length; row++) {
+            for (int col = 0; col < Game.board.length; col++) {
+                System.out.print(Game.board[row][col] + " ");
             }
             System.out.println();
         }
