@@ -34,7 +34,7 @@ public class Pawn extends GamePiece {
     // Check if pawn's first move is valid
     public boolean isValidFirstMove(int nextRow, int nextCol) {
         if (Math.abs(nextRow - currentRow) < 3) {
-            move(nextRow, nextCol);
+            // move(nextRow, nextCol);
             return true;
         }
         System.out.println("Cannot move to " + nextRow + " ," + nextCol);
@@ -45,7 +45,7 @@ public class Pawn extends GamePiece {
     @Override
     public boolean isValidMove(int nextRow, int nextCol) {
         if (Math.abs(nextRow - currentRow) < 2) {
-            move(nextRow, nextCol);
+            // move(nextRow, nextCol);
             return true;
         }
         System.out.println("Cannot move to " + nextRow + " ," + nextCol);
@@ -101,7 +101,7 @@ public class Pawn extends GamePiece {
                 }
             }
             if (validAttack(nextRow, nextCol, isWhite)) {
-                move(nextRow, nextCol);
+                // move(nextRow, nextCol);
                 return true;
             }
         }

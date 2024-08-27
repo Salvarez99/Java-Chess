@@ -7,19 +7,84 @@ public class Rook extends GamePiece {
 
     @Override
     public boolean isValidMove(int nextRow, int nextCol) {
-        /*
-         * Check if we are moving in X or Y direction
-         * Along path check for blockages
-         * if blocks before next pos
-         * false
-         * else check if next pos is GamePiece
-         * check if isEnemy:
-         * move
-         * true
-         * else
-         * false
-         */
-        return false;
+        boolean isBlocked = false;
+
+        // up || down movement
+        if (currentRow != nextRow && currentCol == nextCol) {
+            // Up movement
+            if (nextRow < currentRow) {
+                for (int i = currentRow - 1; i >= nextRow; i--) {
+                    GamePiece scanPiece = Game.board[i][currentCol];
+
+                    if (i != nextRow) {
+                        if (scanPiece != null) {
+                            isBlocked = true;
+                            break;
+                        }
+                    } else {
+                        if (scanPiece != null && (scanPiece.isWhite == this.isWhite)) {
+                            isBlocked = true;
+                        }
+                    }
+                }
+
+            } else {
+                // Down movement
+                for (int i = currentRow + 1; i <= nextRow; i++) {
+                    GamePiece scanPiece = Game.board[i][currentCol];
+
+                    if (i != nextRow) {
+                        if (scanPiece != null) {
+                            isBlocked = true;
+                            break;
+                        }
+                    } else {
+                        if (scanPiece != null && (scanPiece.isWhite == this.isWhite)) {
+                            isBlocked = true;
+                        }
+                    }
+                }
+            }
+
+        } else {
+            // left || right movement
+            // Left movement
+            if (nextCol < currentCol) {
+                for (int i = currentCol - 1; i >= nextCol; i--) {
+                    GamePiece scanPiece = Game.board[currentRow][i];
+
+                    if (i != nextCol) {
+                        if (scanPiece != null) {
+                            isBlocked = true;
+                            break;
+                        }
+                    } else {
+                        if (scanPiece != null && (scanPiece.isWhite == this.isWhite)) {
+                            isBlocked = true;
+                        }
+                    }
+                }
+            } else {
+                // Right movement
+                for (int i = currentCol + 1; i <= nextCol; i++) {
+                    GamePiece scanPiece = Game.board[currentRow][i];
+
+                    if (i != nextCol) {
+                        if (scanPiece != null) {
+                            isBlocked = true;
+                            break;
+                        }
+                    } else {
+                        if (scanPiece != null && (scanPiece.isWhite == this.isWhite)) {
+                            isBlocked = true;
+                        }
+                    }
+                }
+
+            }
+
+        }
+        return !isBlocked;
     }
 
     @Override

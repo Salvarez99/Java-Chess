@@ -62,6 +62,7 @@ public class Game {
         GamePiece piece = Game.board[pieceRow][pieceCol];
 
         if (piece.checkMove(nextRow, nextCol)) {
+            piece.move(nextRow, nextCol);
             return true;
         }
         return false;
