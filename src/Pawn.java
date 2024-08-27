@@ -7,6 +7,7 @@ public class Pawn extends GamePiece {
 
     /**
      * Promote the pawn to the type given
+     * 
      * @param type : piece is promoting to type
      */
     public void promote(PieceType type) {
@@ -51,16 +52,23 @@ public class Pawn extends GamePiece {
     }
 
     public boolean validAttack(int nextX, int nextY, boolean isWhite) {
+        GamePiece piece = Game.board[nextX][nextY];
+
         if (isWhite) {
-            if (((nextX == currentX - 1) && (nextY == currentY + 1))
-                    || ((nextX == currentX - 1) && (nextY == currentY - 1))) {
-                return true;
+            if(nextX == currentX + 1 && nextY == currentY && piece != null){
+                return false;
+            }else{
+                if(isEnemy(piece)){
+                    return true;
+                }
             }
         } else {
-
-            if (((nextX == currentX + 1) && (nextY == currentY + 1))
-                    || ((nextX == currentX + 1) && (nextY == currentY - 1))) {
-                return true;
+            if(nextX == currentX - 1 && nextY == currentY){
+                return false;
+            }else{
+                if(isEnemy(piece)){
+                    return true;
+                }
             }
         }
         return false;
@@ -70,17 +78,11 @@ public class Pawn extends GamePiece {
     public boolean checkMove(int nextX, int nextY) {
         if (inbounds(nextX, nextY)) {
 
-            if (validAttack(nextX, nextY, isWhite)) {
-                move(nextX, nextY);
-                return true;
-
-            } else if (Game.board[nextX][nextY] != null && Math.abs(nextX - currentX) < 2) {
+             if (Game.board[nextX][nextY] != null && Math.abs(nextX - currentX) < 2 && nextY == currentY) {
                 System.out.println("Cannot move to " + nextX + " ," + nextY + " " + Game.board[nextX][nextY]
                         + " is blocking movement");
                 return false;
-            }
-
-            if (this.isWhite) {
+            }else if (this.isWhite) {
                 if (currentX > nextX && nextY == currentY) {
                     if (currentX == 6) {
                         return isValidFirstMove(nextX, nextY);
@@ -96,7 +98,10 @@ public class Pawn extends GamePiece {
                         return isValidMove(nextX, nextY);
                     }
                 }
-            }
+            } if (validAttack(nextX, nextY, isWhite)) {
+                move(nextX, nextY);
+                return true;
+            } 
         }
         System.out.println("Cannot move to " + nextX + " ," + nextY);
         return false;

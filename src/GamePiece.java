@@ -17,11 +17,17 @@ public abstract class GamePiece {
         Game.board[currentX][currentY] = this;
     }
 
+    public boolean isEnemy(GamePiece piece){
+        if(piece != null && piece.isWhite != this.isWhite){
+            return true;
+        }
+        return false;
+    }
+
     public boolean inbounds(int nextX, int nextY) {
         if (((nextX > -1) && (nextX < Game.board.length)) && ((nextY > -1) && (nextY < Game.board.length))) {
             return true;
         }
-
         return false;
     }
 
