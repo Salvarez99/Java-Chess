@@ -13,8 +13,13 @@ public class Bishop extends GamePiece {
 
     @Override
     public boolean checkMove(int nextRow, int nextCol) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'checkMove'");
+        if (inbounds(nextRow, nextCol)) {
+            if (isValidMove(nextRow, nextCol)) {
+                return true;
+            }
+        }
+        System.out.println("Cannot move to " + nextRow + " ," + nextCol);
+        return false;
     }
 
 }
