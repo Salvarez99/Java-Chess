@@ -18,7 +18,7 @@ public class Bishop extends GamePiece {
                 return true;
             }
         }
-        System.out.println("Cannot move to " + nextRow + " ," + nextCol);
+        System.out.println("Cannot move to " + nextRow + ", " + nextCol);
         return false;
     }
 

@@ -40,6 +40,7 @@ public class Knight extends GamePiece {
                 return true;
             }
         }
+        System.out.println("Cannot move to " + nextRow + ", " + nextCol);
         return false;
     }
 }

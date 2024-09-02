@@ -7,8 +7,28 @@ public class King extends GamePiece {
 
     @Override
     public boolean isValidMove(int nextRow, int nextCol) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isValidMove'");
+
+        int rowDiff = Math.abs(nextRow - currentRow);
+        int colDiff = Math.abs(nextCol - currentCol);
+        GamePiece piece = Game.board[nextRow][nextCol];
+        
+        if(piece != null && piece.isWhite == this.isWhite){
+            return false;
+
+        // up / down
+        }else if (rowDiff == 1 && colDiff == 0) {
+            return true;
+
+        // left / right
+        } else if (rowDiff == 0 && colDiff == 1) {
+            return true;
+
+        // diagonal
+        } else if (rowDiff == 1 && colDiff == 1) {
+            return true;
+        }
+
+        return false;
     }
 
     @Override
@@ -18,7 +38,7 @@ public class King extends GamePiece {
                 return true;
             }
         }
-        System.out.println("Cannot move to " + nextRow + " ," + nextCol);
+        System.out.println("Cannot move to " + nextRow + ", " + nextCol);
         return false;
     }
 }
