@@ -27,7 +27,6 @@ public class Rook extends GamePiece {
                         }
                     }
                 }
-
             } else {
                 // Down movement
                 for (int i = currentRow + 1; i <= nextRow; i++) {
@@ -45,7 +44,6 @@ public class Rook extends GamePiece {
                     }
                 }
             }
-
         } else {
             // left || right movement
             // Left movement
@@ -80,9 +78,7 @@ public class Rook extends GamePiece {
                         }
                     }
                 }
-
             }
-
         }
         return !isBlocked;
     }
@@ -94,6 +90,7 @@ public class Rook extends GamePiece {
                 return true;
             }
         }
+        System.out.println("Cannot move to " + nextRow + " ," + nextCol);
         return false;
     }
 }

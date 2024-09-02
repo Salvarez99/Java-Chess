@@ -66,20 +66,5 @@ public abstract class GamePiece {
     public abstract boolean isValidMove(int nextRow, int nextCol);
 
     public abstract boolean checkMove(int nextRow, int nextCol);
-    /**
-     * Net Income Bi-weekly is compared to HS-Fulltime
-     * (payRanges * ((minHrs, maxHrs) * 2) = Biweekly Income)
-     * HS PartTime hours adjusted to sum to 37hrs (for commute) when considering TCS
-     * min and max hours.
-     *
-     * TCS-PartTime (20.50 * (6, 15) * 2 = (246, 615))
-     * HS-FullTime ((15, 22) * 38 * 2 = (1140, 1672))
-     * Net = (+894, +1057)
-     * HS-PartTime ((15, 22) * (31, 22) * 2 = (930, 660) || (1364,968))
-     * Both PartTime = (1176, 1275) || (1610, 1583)
-     * Net = (+36, -397) || (+440, -89)
-     *
-     *
-     */
 
 }

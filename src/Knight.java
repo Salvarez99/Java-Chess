@@ -7,14 +7,40 @@ public class Knight extends GamePiece {
 
     @Override
     public boolean isValidMove(int nextRow, int nextCol) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isValidMove'");
+        /*
+         * knight possible moves
+         * 
+         * |nr - cr|  == 2 && |nc - cc| == 1
+         * |7 - 5| = 2
+         * |1 - 2| = 1
+         * 
+         * |nr - cr|  == 1 && |nc - cc| == 2
+         */
+        int rowDiff = Math.abs(nextRow - currentRow);
+        int colDiff = Math.abs(nextCol - currentCol);
+        GamePiece piece = Game.board[nextRow][nextCol];
+
+        if(piece != null && piece.isWhite == this.isWhite){
+            return false;
+        }else{
+            if(rowDiff == 2 && colDiff == 1){
+                return true;
+            }else if(rowDiff == 1 && colDiff == 2){
+                return true;
+            }
+        }
+
+        return false;
     }
 
     @Override
     public boolean checkMove(int nextRow, int nextCol) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'checkMove'");
+        if (inbounds(nextRow, nextCol)) {
+            if (isValidMove(nextRow, nextCol)) {
+                return true;
+            }
+        }
+        System.out.println("Cannot move to " + nextRow + " ," + nextCol);
+        return false;
     }
-
 }

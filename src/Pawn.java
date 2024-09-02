@@ -37,7 +37,6 @@ public class Pawn extends GamePiece {
             // move(nextRow, nextCol);
             return true;
         }
-        System.out.println("Cannot move to " + nextRow + " ," + nextCol);
         return false;
     }
 
@@ -45,10 +44,8 @@ public class Pawn extends GamePiece {
     @Override
     public boolean isValidMove(int nextRow, int nextCol) {
         if (Math.abs(nextRow - currentRow) < 2) {
-            // move(nextRow, nextCol);
             return true;
         }
-        System.out.println("Cannot move to " + nextRow + " ," + nextCol);
         return false;
     }
 
