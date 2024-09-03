@@ -14,7 +14,7 @@ public class Bishop extends GamePiece {
          * 3. cr + 1 , cc - 1 (bot-left) : nextR > currR and nextC < currR
          * 4. cr + 1 , cc + 1 (bot-right) : nextRC > currRC
          */
-        
+
         GamePiece piece = Game.board[nextRow][nextCol];
         int rowDirection = (nextRow < currentRow) ? -1 : 1; // up : down
         int colDirection = (nextCol < currentCol) ? -1 : 1; // left : right

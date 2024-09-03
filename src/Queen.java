@@ -7,8 +7,39 @@ public class Queen extends GamePiece {
 
     @Override
     public boolean isValidMove(int nextRow, int nextCol) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isValidMove'");
+        // Check if the move is either vertical, horizontal, or diagonal
+        boolean isDiagonal = Math.abs(nextRow - currentRow) == Math.abs(nextCol - currentCol);
+        boolean isVertical = nextCol == currentCol && nextRow != currentRow;
+        boolean isHorizontal = nextRow == currentRow && nextCol != currentCol;
+
+        if (!(isDiagonal || isVertical || isHorizontal)) {
+            return false; // Invalid move for a queen
+        }
+
+        // Determine the direction of movement
+        int rowDirection = Integer.signum(nextRow - currentRow);
+        int colDirection = Integer.signum(nextCol - currentCol);
+
+        // Check each square along the path
+        int tempRow = currentRow + rowDirection;
+        int tempCol = currentCol + colDirection;
+
+        while (tempRow != nextRow || tempCol != nextCol) {
+            if (Game.board[tempRow][tempCol] != null) {
+                return false; // There's a piece blocking the path
+            }
+            tempRow += rowDirection;
+            tempCol += colDirection;
+        }
+
+        // Final position check
+        GamePiece piece = Game.board[nextRow][nextCol];
+        if (piece == null || piece.isWhite != this.isWhite) {
+            return true;
+                         
+        }
+
+        return false;
     }
 
     @Override
