@@ -60,7 +60,7 @@ public abstract class GamePiece {
                 break;
         }
 
-        return color + out + currentRow + currentCol + " ";
+        return color + out + currentRow + currentCol;
     }
 
     public abstract boolean isValidMove(int nextRow, int nextCol);

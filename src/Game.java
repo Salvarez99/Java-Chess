@@ -71,7 +71,12 @@ public class Game {
     public void printBoard() {
         for (int row = 0; row < Game.board.length; row++) {
             for (int col = 0; col < Game.board.length; col++) {
-                System.out.print(Game.board[row][col] + " ");
+                GamePiece piece = Game.board[row][col];
+                if(piece != null){
+                    System.out.print(Game.board[row][col] + " ");
+                }else{
+                    System.out.print("--" + row + col + " ");
+                }
             }
             System.out.println();
         }

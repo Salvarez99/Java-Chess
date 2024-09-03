@@ -7,8 +7,39 @@ public class Bishop extends GamePiece {
 
     @Override
     public boolean isValidMove(int nextRow, int nextCol) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isValidMove'");
+        /*
+         * Bishop moves:
+         * 1. cr - 1 , cc - 1 (top-left) : nextRC < currRC
+         * 2. cr - 1 , cc + 1 (top-right) : nextR < currR and nextC > currR 
+         * 3. cr + 1 , cc - 1 (bot-left) : nextR > currR and nextC < currR
+         * 4. cr + 1 , cc + 1 (bot-right) : nextRC > currRC
+         */
+        
+        GamePiece piece = Game.board[nextRow][nextCol];
+        int rowDirection = (nextRow < currentRow) ? -1 : 1; // up : down
+        int colDirection = (nextCol < currentCol) ? -1 : 1; // left : right
+
+        if(Math.abs((nextRow - currentRow)) != Math.abs((nextCol - currentCol))){
+            return false;
+        }
+
+        int tempRow = currentRow + rowDirection;
+        int tempCol = currentCol + colDirection;
+
+        //Checking if path is blocked
+        while(tempRow != nextRow && tempCol != nextCol){
+            if(Game.board[tempRow][tempCol] != null){
+                 return false;
+            }
+            tempRow += rowDirection;
+            tempCol += colDirection;
+        }
+
+        if (piece == null || piece.isWhite != this.isWhite) {
+            return true;
+        }
+
+        return false;
     }
 
     @Override
